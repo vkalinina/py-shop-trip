@@ -9,12 +9,22 @@ class Car:
     fuel_consumption: float
 
 
-def load_fuel_price_from_config() -> float:
+def load_fuel_price_from_config() -> float | None:
     config_path = Path(__file__).parent / "config.json"
 
-    with open(config_path, "r", encoding="utf-8") as f:
-        config = json.load(f)
+    try:
+        with open(config_path, "r", encoding="utf-8") as f:
+            config = json.load(f)
 
-        fuel_price = config["FUEL_PRICE"]
+            if "FUEL_PRICE" not in config:
+                raise ValueError("FUEL_PRICE is missing in config.json")
 
-        return fuel_price
+            fuel_price = config["FUEL_PRICE"]
+
+            return fuel_price
+    except FileNotFoundError:
+        print("No config.json file found")
+        return None
+    except json.decoder.JSONDecodeError:
+        print("Decoding error JSON")
+        return None

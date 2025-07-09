@@ -15,7 +15,7 @@ def shop_trip() -> None:
     for i, customer in enumerate(customers):
         print(f"{customer.name} has {customer.money} dollars")
 
-        best_prise = float("inf")
+        best_price = float("inf")
         best_shop = None
         best_trip_cost = 0
 
@@ -44,12 +44,12 @@ def shop_trip() -> None:
                 f"{shop.name} costs {trip_cost:.2f}"
             )
 
-            if trip_cost < best_prise:
-                best_prise = trip_cost
+            if trip_cost < best_price:
+                best_price = trip_cost
                 best_shop = shop
                 best_trip_cost = trip_cost
 
-        if best_prise > customer.money:
+        if best_price > customer.money:
             print(
                 f"{customer.name} doesn't have enough "
                 f"money to make a purchase in any shop"
@@ -60,7 +60,7 @@ def shop_trip() -> None:
             print()
             print(
                 f"Date: "
-                f"{datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S")}"
+                f"""{datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S")}"""
             )
             print(f"Thanks, {customer.name}, for your purchase!")
             print("You have bought:")
