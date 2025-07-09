@@ -36,7 +36,8 @@ def load_shops_from_config() -> list[Shop]:
             if "shops" in config:
                 for shop_data in config["shops"]:
                     shop = create_shop(shop_data)
-                    shops.append(shop)
+                    if shop is None:
+                        shops.append(shop)
 
             return shops
 
